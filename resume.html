@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>BW | Résumé</title>
+  <meta name="description" content="Résumé — BW, Director × DP." />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -14,9 +15,13 @@
         <p class="subtitle">DIRECTOR × DP</p>
       </div>
       <nav class="links">
-        <a href="index.html">Home</a>
-        <a href="mailto:hello@byronwerner.net">Email</a>
-        <a href="https://www.instagram.com/byronwernerdp" target="_blank">Instagram</a>
+        <a href="index.html">Work</a>
+        <a class="icon-btn" href="mailto:byronwerner@me.com" aria-label="Email">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M3 6h18v12H3z" stroke="currentColor" stroke-width="1.6" />
+            <path d="M3 7l9 6 9-6" stroke="currentColor" stroke-width="1.6" fill="none"/>
+          </svg>
+        </a>
       </nav>
     </div>
   </header>
@@ -74,15 +79,5 @@
       </ul>
     </section>
   </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <p>© <span id="year"></span> BW. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
