@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BW | DIRECTOR × DP</title>
+    <meta name="description" content="Portfolio of BW — Director × Director of Photography. Selected works and résumé." />
+    <link rel="icon" href="assets/favicon.svg" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container head-wrap">
+        <div>
+          <h1>BW</h1>
+          <p class="subtitle">DIRECTOR × DP</p>
+        </div>
+        <nav class="links">
+          <a href="mailto:hello@byronwerner.net">Email</a>
+          <a href="https://www.instagram.com/byronwernerdp" target="_blank">Instagram</a>
+          <a href="#work">Work</a>
+          <a href="#resume">Résumé</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <section id="work" class="section">
+        <h2>Selected Work</h2>
+        <div id="grid" class="grid"></div>
+      </section>
+
+      <section id="resume" class="section">
+        <h2>Résumé</h2>
+        <p><a href="assets/resume.pdf" target="_blank">Open Résumé (PDF)</a></p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>© <span id="year"></span> BW. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Vimeo modal -->
+    <div id="modal" class="modal" aria-hidden="true">
+      <div class="modal-backdrop" id="modalBackdrop"></div>
+      <div class="modal-content">
+        <button class="modal-close" id="modalClose">×</button>
+        <div class="video-embed ratio-16x9">
+          <iframe id="player" src="about:blank" frameborder="0"
+            allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const videos = [
+        { title: "Project One", thumb: "assets/thumb-1.jpg", vimeoId: "76979871" },
+        { title: "Project Two", thumb: "assets/thumb-2.jpg", vimeoId: "22439234" },
+        { title: "Project Three", thumb: "assets/thumb-3.jpg", vimeoId: "39553324" },
+        { title: "Project Four", thumb: "assets/thumb-4.jpg", vimeoId: "148751763" }
+      ];
+
+      const grid = document.getElementById('grid');
+
+      function createCard(item) {
+        const article = document.createElement('article');
+        article.className = 'card';
+        article.innerHTML = `
+          <button class="thumb-btn" data-id="${item.vimeoId}">
+            <img src="${item.thumb}" alt="${item.title} thumbnail" />
+          </button>
+          <h3>${item.title}</h3>
+        `;
+        return article;
+      }
+
+      videos.forEach(v => grid.appendChild(createCard(v)));
+
+      const modal = document.getElementById('modal');
+      const player = document.getElementById('player');
+      const btnClose = document.getElementById('modalClose');
+      const backdrop = document.getElementById('modalBackdrop');
+
+      function openModal(id) {
+        player.src = `https://player.vimeo.com/video/${id}?autoplay=1&title=0&byline=0&portrait=0`;
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('no-scroll');
+      }
+
+      function closeModal() {
+        player.src = 'about:blank';
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('no-scroll');
+      }
+
+      grid.addEventListener('click', e => {
+        const btn = e.target.closest('.thumb-btn');
+        if (!btn) return;
+        openModal(btn.dataset.id);
+      });
+
+      btnClose.addEventListener('click', closeModal);
+      backdrop.addEventListener('click', closeModal);
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
