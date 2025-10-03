@@ -1,18 +1,18 @@
-/* Reset & base */
+/* ========== Reset & Theme ========== */
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 :root {
   --bg: #0c0d10;
   --fg: #e7e9ee;
   --muted: #a6adbb;
-  --accent: #7dd3fc;
+  --accent: #7dd3fc;   /* soft cyan accent */
   --card: #12131a;
   --border: #232533;
 }
 body {
   background: var(--bg);
   color: var(--fg);
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
   line-height: 1.6;
 }
 .no-scroll { overflow: hidden; }
@@ -23,38 +23,42 @@ body {
   padding: 24px;
 }
 
-/* Header */
+/* ========== Header ========== */
 .site-header {
-  position: sticky;
-  top: 0;
-  z-index: 10;
+  position: sticky; top: 0; z-index: 10;
   backdrop-filter: blur(8px);
   background: rgba(12, 13, 16, 0.7);
   border-bottom: 1px solid var(--border);
 }
 .head-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
 }
-h1 { margin: 0; font-size: clamp(28px, 4vw, 40px); }
+h1 { margin: 0; font-size: clamp(28px, 4vw, 40px); letter-spacing: 0.5px; }
 .subtitle { margin: 4px 0 12px; color: var(--muted); }
-.links { display: flex; gap: 16px; flex-wrap: wrap; }
+.links { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 .links a {
   color: var(--fg);
   text-decoration: none;
   border-bottom: 1px solid transparent;
-  transition: border-color 0.2s;
+  transition: border-color .2s;
 }
 .links a:hover { border-color: var(--accent); }
 
-/* Sections */
+/* Mail icon button (no visible address) */
+.icon-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--fg);
+}
+.icon-btn:hover { border-color: var(--accent); }
+
+/* ========== Sections & Headings ========== */
 .section { margin-top: 40px; }
 h2 { font-size: clamp(20px, 3vw, 28px); margin: 0 0 16px; }
-.hint { color: var(--muted); margin: -8px 0 16px; }
 
-/* Grid of thumbnails */
+/* ========== Grid of Thumbnails ========== */
 .grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -70,98 +74,55 @@ h2 { font-size: clamp(20px, 3vw, 28px); margin: 0 0 16px; }
   padding: 12px;
   transition: transform .12s ease, box-shadow .12s ease;
 }
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(0,0,0,.35);
-}
-.card h3 {
-  margin: 10px 6px 2px;
-  font-size: 18px;
-}
+.card:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+.card h3 { margin: 10px 6px 2px; font-size: 18px; }
 
-/* Thumbnail buttons */
+/* Thumbnail button with subtle play pill */
 .thumb-btn {
-  display: block;
-  border: 0;
-  padding: 0;
-  background: transparent;
-  cursor: pointer;
-  border-radius: 12px;
-  overflow: hidden;
-  position: relative;
+  display: block; border: 0; padding: 0; background: transparent; cursor: pointer;
+  border-radius: 12px; overflow: hidden; position: relative;
 }
 .thumb-btn::after {
-  /* play icon overlay */
   content: "►";
-  position: absolute;
-  right: 10px;
-  bottom: 8px;
+  position: absolute; right: 10px; bottom: 8px;
   background: rgba(0,0,0,.6);
-  color: #fff;
-  font-size: 14px;
-  padding: 6px 10px;
-  border-radius: 999px;
+  color: #fff; font-size: 14px;
+  padding: 6px 10px; border-radius: 999px;
 }
 .thumb-btn img {
-  display: block;
-  width: 100%;
-  height: auto;
+  display: block; width: 100%; height: auto;
   border: 1px solid var(--border);
   border-radius: 12px;
 }
 
-/* Modal */
+/* ========== Modal Player ========== */
 .modal[aria-hidden="true"] { display: none; }
 .modal[aria-hidden="false"] {
-  position: fixed;
-  inset: 0;
-  z-index: 50;
-  display: grid;
-  place-items: center;
+  position: fixed; inset: 0; z-index: 50;
+  display: grid; place-items: center;
 }
 .modal-backdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,.6);
-  backdrop-filter: blur(2px);
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,.6); backdrop-filter: blur(2px);
 }
 .modal-content {
-  position: relative;
-  width: min(920px, 92vw);
-  padding: 16px;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
+  position: relative; width: min(920px, 92vw); padding: 16px;
+  background: var(--card); border: 1px solid var(--border); border-radius: 16px;
   box-shadow: 0 20px 60px rgba(0,0,0,.45);
 }
 .modal-close {
-  position: absolute;
-  top: 8px;
-  right: 10px;
-  background: rgba(255,255,255,.08);
-  color: var(--fg);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 6px 10px;
-  cursor: pointer;
-  font-size: 18px;
-}
-.video-embed {
-  width: 100%;
-  background: #000;
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid var(--border);
-}
-.ratio-16x9 { position: relative; padding-top: 56.25%; }
-.ratio-16x9 iframe {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  position: absolute; top: 8px; right: 10px;
+  background: rgba(255,255,255,.08); color: var(--fg);
+  border: 1px solid var(--border); border-radius: 10px;
+  padding: 6px 10px; cursor: pointer; font-size: 18px;
 }
 
-/* Footer */
+/* 16:9 responsive iframe area */
+.video-embed { width: 100%; background: #000; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
+.ratio-16x9 { position: relative; padding-top: 56.25%; }
+.ratio-16x9 iframe { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+/* ========== Footer (kept minimal; remove if unused) ========== */
 .site-footer {
   border-top: 1px solid var(--border);
   margin-top: 40px;
@@ -170,9 +131,25 @@ h2 { font-size: clamp(20px, 3vw, 28px); margin: 0 0 16px; }
   text-align: center;
 }
 
-.resume-link {
-  color: var(--fg);
-  border-bottom: 1px solid var(--accent);
-  text-decoration: none;
+/* ========== Resume Page ========== */
+.resume-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
-.resume-link:hover { opacity: 0.9; }
+.resume-list li {
+  margin: 4px 0;
+  padding-left: 8px;
+  border-left: 2px solid var(--accent);
+}
+
+/* Optional: make list columns on wide screens */
+@media (min-width: 900px) {
+  .resume-list {
+    columns: 2;       /* auto-split into two columns */
+    column-gap: 28px;
+  }
+  .resume-list li {
+    break-inside: avoid;
+  }
+}
